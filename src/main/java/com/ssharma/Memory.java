@@ -1,6 +1,6 @@
 package com.ssharma;
 
-import com.ssharma.Exceptions.InvalidMemoryAddressException;
+import com.ssharma.Exceptions.InvalidAddressException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public class Memory {
         if (address < 0 || address > size - 1){
             String errorMessage = "Invalid memory address "+ address + " encountered";
             logger.error(errorMessage);
-            throw new InvalidMemoryAddressException(errorMessage);
+            throw new InvalidAddressException(errorMessage);
         }
         return cells[address];
     }
@@ -28,7 +28,7 @@ public class Memory {
         if (address < 0 || address > size - 1){
             String errorMessage = "Invalid memory address "+ address + " encountered";
             logger.error(errorMessage);
-            throw new InvalidMemoryAddressException(errorMessage);
+            throw new InvalidAddressException(errorMessage);
         }
         cells[address] = value;
     }

@@ -1,5 +1,6 @@
 package com.ssharma;
 
+import com.ssharma.Exceptions.InvalidAddressException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,10 +20,20 @@ public class RegisterFile {
     }
 
     public int getRegisterValue(int i){
+        if (i < 0 || i > registers.size() - 1){
+            String errorMessage = "Invalid register "+ i + " encountered";
+            logger.error(errorMessage);
+            throw new InvalidAddressException(errorMessage);
+        }
         return registers.get(i).getData();
     }
 
     public void setRegisterValue(int i, int value){
+        if (i < 0 || i > registers.size() - 1){
+            String errorMessage = "Invalid register "+ i + " encountered";
+            logger.error(errorMessage);
+            throw new InvalidAddressException(errorMessage);
+        }
         registers.get(i).setValue(value);
     }
 }
