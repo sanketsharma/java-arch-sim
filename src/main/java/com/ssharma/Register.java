@@ -1,7 +1,5 @@
 package com.ssharma;
 
-import java.util.BitSet;
-
 public class Register {
     private int data;
 

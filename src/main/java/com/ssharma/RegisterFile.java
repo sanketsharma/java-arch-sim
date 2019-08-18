@@ -11,9 +11,9 @@ public class RegisterFile {
     private static final Logger logger = LoggerFactory.getLogger(RegisterFile.class);
     private final List<Register> registers;
 
-    public RegisterFile() {
+    public RegisterFile(int size) {
         this.registers = new ArrayList<>();
-        for(int i = 0; i < 32; i++){
+        for(int i = 0; i < size; i++){
             registers.add(new Register());
         }
         logger.debug("Register file initialized");
