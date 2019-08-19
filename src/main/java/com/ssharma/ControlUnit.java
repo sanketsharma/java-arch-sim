@@ -13,7 +13,7 @@ public class ControlUnit {
     private final int beq = 0b000100;
 
     public ControlUnit() {
-        logger.info("ControlUnit inititalized");
+        logger.info("ControlUnit initialized");
     }
 
     public int getRegDst(int instruction){
