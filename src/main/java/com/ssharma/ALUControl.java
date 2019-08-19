@@ -13,7 +13,7 @@ public class ALUControl {
     }
 
     public int getALUControlInput(int aLUOp, int functField){
-        switch (aLUOp & 0b111) {
+        switch (aLUOp & 0b11) {
             case 0b00:
                 //Instruction OpCode: LW
                 //Instruction operation: load word
