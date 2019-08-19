@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 
 public class ControlUnit {
     private static final Logger logger = LoggerFactory.getLogger(ControlUnit.class);
-    private final int  mask = 0xFC000000; //0b11111100000000000000000000000000
+    private final int  mask = 0xFC_000_000; //0b11111100000000000000000000000000
     private final int rFormat = 0;
-    private final int lw = 0b1000110;
-    private final int sw = 0b101011;
-    private final int beq = 0b000100;
+    private final int lw = 0b100_011;
+    private final int sw = 0b101_011;
+    private final int beq = 0b000_100;
 
     public ControlUnit() {
         logger.info("ControlUnit initialized");
