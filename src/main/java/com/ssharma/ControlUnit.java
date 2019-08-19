@@ -92,10 +92,10 @@ public class ControlUnit {
                 return 1;
 
             case sw:
-                return 0; //We don't care
+                return 0;
 
             case beq:
-                return 0; //We don't care
+                return 0;
 
             default: //Error
                 String message = "Invalid instruction "+ instruction + " encountered";
@@ -114,10 +114,10 @@ public class ControlUnit {
                 return 1;
 
             case sw:
-                return 0; //We don't care
+                return 0;
 
             case beq:
-                return 0; //We don't care
+                return 0;
 
             default: //Error
                 String message = "Invalid instruction "+ instruction + " encountered";
@@ -136,10 +136,10 @@ public class ControlUnit {
                 return 0;
 
             case sw:
-                return 1; //We don't care
+                return 1;
 
             case beq:
-                return 0; //We don't care
+                return 0;
 
             default: //Error
                 String message = "Invalid instruction "+ instruction + " encountered";
@@ -158,10 +158,10 @@ public class ControlUnit {
                 return 0;
 
             case sw:
-                return 0; //We don't care
+                return 0;
 
             case beq:
-                return 1; //We don't care
+                return 1;
 
             default: //Error
                 String message = "Invalid instruction "+ instruction + " encountered";
@@ -180,10 +180,10 @@ public class ControlUnit {
                 return 0;
 
             case sw:
-                return 0; //We don't care
+                return 0;
 
             case beq:
-                return 0; //We don't care
+                return 0;
 
             default: //Error
                 String message = "Invalid instruction "+ instruction + " encountered";
@@ -202,10 +202,10 @@ public class ControlUnit {
                 return 0;
 
             case sw:
-                return 0; //We don't care
+                return 0;
 
             case beq:
-                return 1; //We don't care
+                return 1;
 
             default: //Error
                 String message = "Invalid instruction "+ instruction + " encountered";
