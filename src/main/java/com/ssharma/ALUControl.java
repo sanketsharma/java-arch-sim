@@ -1,7 +1,6 @@
 package com.ssharma;
 
-import com.ssharma.Exceptions.InvalidBusException;
-import com.ssharma.Exceptions.InvalidBusSizeException;
+import com.ssharma.Exceptions.InvalidSignalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,63 +12,46 @@ public class ALUControl {
         logger.info("ALUControl initialized");
     }
 
-    public Bus getALUControlInput(Bus aLUOp, Bus functField) throws InvalidBusSizeException{
-        if(aLUOp.getRelevantLSBs() != 3 || functField.getRelevantLSBs() != 6){
-            String errorMessage = "Unexpected bus size encountered";
-            logger.error(errorMessage);
-            throw new InvalidBusSizeException(errorMessage);
-        }
-        Bus aLUControlInput = new Bus();
-        aLUControlInput.setRelevantLSBs(relevantALUControlBits);
-        switch (aLUOp.getBits() & 0b111) {
+    public int getALUControlInput(int aLUOp, int functField){
+        switch (aLUOp & 0b111) {
             case 0b00:
                 //Instruction OpCode: LW
                 //Instruction operation: load word
 
                 //Instruction OpCode: SW
                 //Instruction operation: store word
-
-                aLUControlInput.setBits(0b0010);// Desired ALU action: add
-                break;
+                return 0b0010;// Desired ALU action: add
 
             case 0b01:
                 //Instruction OpCode: Branch Equal
-                aLUControlInput.setBits(0b110);// Desired ALU action: subtract
-                break;
+                return 0b110;// Desired ALU action: subtract
 
             case 0b10: //Instruction opcode: R-type
-                switch (functField.getBits() & 0b111111){
+                switch (functField & 0b111111){
                     case 0b100000: //Instruction operation: add
-                        aLUControlInput.setBits(0b0010);// Desired ALU action: add
-                        break;
+                        return 0b0010;// Desired ALU action: add
 
                     case 0b100010: //Instruction operation: subtract
-                        aLUControlInput.setBits(0b0110);// Desired ALU action: subtract
-                        break;
+                        return 0b0110;// Desired ALU action: subtract
 
                     case 0b100100: //Instruction operation: AND
-                        aLUControlInput.setBits(0b0000); //Desired ALU option: AND
-                        break;
+                        return 0b0000; //Desired ALU option: AND
 
                     case 0b100101: //Instruction operation: OR
-                        aLUControlInput.setBits(0b0001); //Desired ALU option: OR
-                        break;
+                        return 0b0001; //Desired ALU option: OR
 
                     case 0b101010: //Instruction operation: set or less than
-                        aLUControlInput.setBits(0b0111); //Desired ALU option: set or less than
-                        break;
+                        return 0b0111; //Desired ALU option: set or less than
 
                     default: //Error
                         String message = "Invalid functField "+ functField + " encountered";
                         logger.error(message);
-                        throw new InvalidBusException(message);
+                        throw new InvalidSignalException(message);
                 }
-                break;
             default: //Error
                 String message = "Invalid aLUOp "+ aLUOp + " encountered";
                 logger.error(message);
-                throw new InvalidBusException(message);
+                throw new InvalidSignalException(message);
         }
-        return aLUControlInput;
     }
 }
