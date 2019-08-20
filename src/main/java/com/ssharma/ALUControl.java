@@ -4,11 +4,11 @@ import com.ssharma.Exceptions.InvalidSignalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ALUControl {
+class ALUControl {
     private static final Logger logger = LoggerFactory.getLogger(ALUControl.class);
     private final int relevantALUControlBits = 4;
 
-    public ALUControl(){
+    ALUControl(){
         logger.info("ALUControl initialized");
     }
 
