@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 public class SignExtend {
     public static final Logger logger = LoggerFactory.getLogger(SignExtend.class);
 
-    SignExtend(){
+    public SignExtend(){
         logger.info("16 bit to 32 bit sign extend created");
     }
 

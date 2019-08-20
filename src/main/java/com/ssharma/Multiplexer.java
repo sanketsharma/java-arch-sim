@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 public class Multiplexer {
     public static final Logger logger = LoggerFactory.getLogger(Multiplexer.class);
 
-    Multiplexer(){
+    public Multiplexer(){
         logger.info("2 to 1 multiplexer created");
     }
 
