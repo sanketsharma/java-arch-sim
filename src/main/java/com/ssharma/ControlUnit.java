@@ -16,10 +16,10 @@ public class ControlUnit {
         logger.info("ControlUnit initialized");
     }
 
-    public int getRegDst(int instruction) {
 
+    public int getRegDst(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 1;
 
@@ -39,9 +39,9 @@ public class ControlUnit {
         }
     }
 
-    public int getALUSrc(int instruction) {
+    public int getALUSrc(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 0;
 
@@ -61,9 +61,9 @@ public class ControlUnit {
         }
     }
 
-    public int getMemtoReg(int instruction) {
+    public int getMemtoReg(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 0;
 
@@ -83,9 +83,9 @@ public class ControlUnit {
         }
     }
 
-    public int getRegWrite(int instruction) {
+    public int getRegWrite(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 1;
 
@@ -105,9 +105,9 @@ public class ControlUnit {
         }
     }
 
-    public int getMemRead(int instruction) {
+    public int getMemRead(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 0;
 
@@ -127,9 +127,9 @@ public class ControlUnit {
         }
     }
 
-    public int getMemWrite(int instruction) {
+    public int getMemWrite(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 0;
 
@@ -149,9 +149,9 @@ public class ControlUnit {
         }
     }
 
-    public int getBranch(int instruction) {
+    public int getBranch(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 0;
 
@@ -171,9 +171,9 @@ public class ControlUnit {
         }
     }
 
-    public int getALUOp1(int instruction) {
+    public int getALUOp1(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 1;
 
@@ -193,9 +193,9 @@ public class ControlUnit {
         }
     }
 
-    public int getALUOp0(int instruction) {
+    public int getALUOp0(int instruction){
         int op = (instruction & mask) >>> 26;
-        switch (op) {
+        switch (op){
             case rFormat:
                 return 0;
 
