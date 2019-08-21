@@ -1,4 +1,4 @@
-package com.ssharma;
+package com.ssharma.Components;
 
 public class Register {
     private int data;

@@ -1,10 +1,10 @@
-package com.ssharma;
+package com.ssharma.Components;
 
 import com.ssharma.Exceptions.InvalidSignalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-class ALUControl {
+public class ALUControl {
     private static final Logger logger = LoggerFactory.getLogger(ALUControl.class);
     private final int relevantALUControlBits = 4;
 

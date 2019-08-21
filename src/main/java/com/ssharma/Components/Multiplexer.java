@@ -1,4 +1,4 @@
-package com.ssharma;
+package com.ssharma.Components;
 
 import com.ssharma.Exceptions.InvalidSignalException;
 import org.slf4j.Logger;
