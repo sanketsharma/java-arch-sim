@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class ControlUnit {
     private static final Logger logger = LoggerFactory.getLogger(ControlUnit.class);
-    private final int  mask = 0xFC_000_000; //0b11111100000000000000000000000000
+    private final int mask = 0xFC_000_000; //0b11111100000000000000000000000000
     private final int rFormat = 0;
     private final int lw = 0b100_011;
     private final int sw = 0b101_011;
@@ -15,6 +15,7 @@ public class ControlUnit {
     public ControlUnit() {
         logger.info("ControlUnit initialized");
     }
+
 
     public int getRegDst(int instruction){
         int op = (instruction & mask) >>> 26;
@@ -32,7 +33,7 @@ public class ControlUnit {
                 return 0; //We don't care
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -54,7 +55,7 @@ public class ControlUnit {
                 return 0;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -76,7 +77,7 @@ public class ControlUnit {
                 return 0; //We don't care
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -98,7 +99,7 @@ public class ControlUnit {
                 return 0;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -120,7 +121,7 @@ public class ControlUnit {
                 return 0;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -142,7 +143,7 @@ public class ControlUnit {
                 return 0;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -164,7 +165,7 @@ public class ControlUnit {
                 return 1;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -186,7 +187,7 @@ public class ControlUnit {
                 return 0;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
@@ -208,7 +209,7 @@ public class ControlUnit {
                 return 1;
 
             default: //Error
-                String message = "Invalid instruction "+ instruction + " encountered";
+                String message = "Invalid instruction " + instruction + " encountered";
                 logger.error(message);
                 throw new InvalidSignalException(message);
         }
