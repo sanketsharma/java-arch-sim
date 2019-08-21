@@ -25,7 +25,7 @@ public class RegisterFile {
             logger.error(errorMessage);
             throw new InvalidAddressException(errorMessage);
         }
-        return registers.get(i).getData();
+        return registers.get(i).getValue();
     }
 
     public void setRegisterValue(int i, int value){

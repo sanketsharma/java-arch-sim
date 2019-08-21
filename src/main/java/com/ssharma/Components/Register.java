@@ -1,16 +1,16 @@
 package com.ssharma.Components;
 
 public class Register {
-    private int data;
+    private int value;
 
 public Register() {
     }
 
-    public int getData() {
-        return data;
+    public int getValue() {
+        return value;
     }
 
     public void setValue(int data){
-        this.data = data;
+        this.value = data;
     }
 }
