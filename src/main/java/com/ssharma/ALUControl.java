@@ -8,7 +8,7 @@ class ALUControl {
     private static final Logger logger = LoggerFactory.getLogger(ALUControl.class);
     private final int relevantALUControlBits = 4;
 
-    ALUControl(){
+    public ALUControl(){
         logger.info("ALUControl initialized");
     }
 
