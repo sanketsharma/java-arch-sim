@@ -53,10 +53,11 @@ public class CPU {
     public void run(){
         while(!halted){
             int instruction = getInstruction(programCounter);
-            controlUnit.setInput((instruction >>> 26) & 0x111_111);
+            controlUnit.setInput((instruction >>> 26) & 0b111_111);
 
             int op0 = getOp0(instruction);
             int op1 = getOp1(instruction);
+
 
 
             updateProgramCounter();
