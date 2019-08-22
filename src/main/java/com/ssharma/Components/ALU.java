@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 public class ALU {
     private static final Logger logger = LoggerFactory.getLogger(ALU.class);
     private static final int mask = 0x00_00_00_0F;
+    private int control;
     private int zero = 0;
 
     /* Function                            ALU control lines */
@@ -17,7 +18,11 @@ public class ALU {
     private static final int SET_ON_LESS_THAN = 0b01_11;
     private static final int NOR =              0b11_00;
 
-    public int compute(int op0, int op1, int control){
+    public void setControl(int control) {
+        this.control = control;
+    }
+
+    public int compute(int op0, int op1){
         if(op0 == op1){
             zero = 1;
         } else {

@@ -14,7 +14,9 @@ public class CPU {
     private Memory dataMemory;
     private ControlUnit controlUnit;
     private SignExtend signExtend;
-    private ALU alu;
+    private Multiplexer multiplexer;
+    private ALUControl aLUControl;
+    private ALU aLU;
 
 
     public CPU(){
@@ -27,40 +29,102 @@ public class CPU {
         dataMemory = new Memory(0xFFFF);
         controlUnit = new ControlUnit();
         signExtend = new SignExtend();
-        alu = new ALU();
+        aLUControl = new ALUControl();
+        aLU = new ALU();
 
         logger.info("CPU created");
     }
 
-    private int getInstruction(Register programCounter){
+    private int fetchInstruction(Register programCounter){
         return instructionMemory.getMemoryLocationValue(programCounter.getValue());
     }
 
-    private int getOp0(int instruction){
-        int address = (instruction >>> 21) & 0b11_111;
-        return registerFile.getRegisterValue(address);
+    private int extract26To31(int instruction){
+        return (instruction >>> 26) & 0b11_111;
     }
 
-    private int getOp1(int instruction){
-        int address = (instruction >>> 16) & 0b11_111;
-        return registerFile.getRegisterValue(address);
+    private int extract21To25(int instruction){
+        return (instruction >>> 21) & 0b11_111;
     }
 
-    private void updateProgramCounter(){
+    private int extract16To20(int instruction){
+        return (instruction >>> 16) & 0b11_111;
+    }
 
+    private int extract11To15(int instruction){
+        return (instruction >>> 15) & 0b11_111;
+    }
+
+    private int getALUOp(){
+        int aLUOp0 = controlUnit.getALUOp0();
+        int aLUOp1 = controlUnit.getALUOp1();
+
+        int aLUOp = aLUOp0 + (aLUOp1 << 1);
+        return aLUOp;
+    }
+
+    private void updateProgramCounter(int offsetForBELShifted2){
+        int aLUZero = aLU.getZero();
+        int branch = controlUnit.getBranch();
+        int muxSelectLine = branch & aLUZero;
+        int nextInstructionAddress = multiplexer.select(offsetForBELShifted2 + programCounter.getValue() + 4,
+                programCounter.getValue() + 4 , muxSelectLine);
+        programCounter.setValue(nextInstructionAddress);
     }
 
     public void run(){
         while(!halted){
-            int instruction = getInstruction(programCounter);
-            controlUnit.setInput((instruction >>> 26) & 0b111_111);
+            int instruction = fetchInstruction(programCounter);
 
-            int op0 = getOp0(instruction);
-            int op1 = getOp1(instruction);
+            int ins26To31 = extract26To31(instruction);
+            controlUnit.setInput(ins26To31);
 
+            int ins21To25 = extract21To25(instruction);
+            int ins16To20 = extract16To20(instruction);
 
+            int readData0 = registerFile.getRegisterValue(ins21To25);
+            int readData1 = registerFile.getRegisterValue(ins16To20);
 
-            updateProgramCounter();
+            int offsetForBEL16 = instruction & 0xFFFF;
+            int offsetForBEL32  = signExtend.extend16To32(offsetForBEL16);
+
+            int operand0 = readData0;
+            int aLUSrc = controlUnit.getALUSrc();
+            int operand1 = multiplexer.select(readData1, offsetForBEL32, aLUSrc);
+
+            int aLUOp = getALUOp();
+            int functField = instruction & 0b111_111;
+            aLUControl.setInput(aLUOp, functField);
+
+            int aLUControlInput  = aLUControl.getALUControlInput();
+            aLU.setControl(aLUControlInput);
+
+            int aluResult = aLU.compute(operand0, operand1);
+            logger.debug("ALU result: " + aluResult);
+            int aLUZero = aLU.getZero();
+
+            int dataMemoryAddress = aluResult;
+
+            int memRead = controlUnit.getMemRead();
+            int readData = 0;
+
+            if(memRead == 1){
+                readData = dataMemory.getMemoryLocationValue(dataMemoryAddress);
+            }
+
+            if(controlUnit.getMemWrite() == 1){
+                dataMemory.setMemoryLocationValue(aluResult, readData1);
+            }
+
+            int writeData = multiplexer.select(readData, aluResult, controlUnit.getMemtoReg());
+            int regDst = controlUnit.getRegDst();
+            int ins11To15 = extract11To15(instruction);
+            int writeRegisterAddress = multiplexer.select(ins11To15, ins16To20, regDst);
+
+            if(controlUnit.getRegWrite() == 1){
+                registerFile.setRegisterValue(writeRegisterAddress, writeData);
+            }
+            updateProgramCounter(offsetForBEL32 << 2);
         }
 
     }

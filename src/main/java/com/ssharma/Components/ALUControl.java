@@ -7,12 +7,18 @@ import org.slf4j.LoggerFactory;
 public class ALUControl {
     private static final Logger logger = LoggerFactory.getLogger(ALUControl.class);
     private final int relevantALUControlBits = 4;
+    private int aLUOp;
+    private int functField;
 
     public ALUControl(){
         logger.info("ALUControl initialized");
     }
 
-    public int getALUControlInput(int aLUOp, int functField){
+    public void setInput(int aLUOp, int functField){
+        this.aLUOp = aLUOp;
+        this.functField = functField;
+    }
+    public int getALUControlInput(){
         switch (aLUOp & 0b11) {
             case 0b00:
                 //Instruction OpCode: LW

@@ -4,6 +4,7 @@ import com.ssharma.Exceptions.InvalidSignalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//TODO: Implement jump instruction
 public class ControlUnit {
     private static final Logger logger = LoggerFactory.getLogger(ControlUnit.class);
     private final int rFormat = 0;
