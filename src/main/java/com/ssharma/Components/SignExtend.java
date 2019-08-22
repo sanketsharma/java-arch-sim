@@ -12,12 +12,13 @@ public class SignExtend {
     }
 
     public int extend16To32(int input){
-        if(input > 0xFFFF){
+        if((input >>> 16) != 0){
             String message = "Invalid input "+ input + " encountered";
             logger.error(message);
             throw new InvalidSignalException(message);
         }
-        if (input >= 0){
+        int msb =  (input >>> 15) & 0b1;
+        if (msb == 0b0){
             return input;
         } else {
             return input | 0xFFFF0000;
