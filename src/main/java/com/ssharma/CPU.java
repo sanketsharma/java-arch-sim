@@ -22,13 +22,14 @@ public class CPU {
     public CPU(){
         halted = false;
 
-        programCounter = new Register(); //TODO: What is the initial value?
+        programCounter = new Register();
         programCounter.setValue(0x0000);
         registerFile = new RegisterFile(32);
         instructionMemory = new Memory(0xFFFF);
         dataMemory = new Memory(0xFFFF);
         controlUnit = new ControlUnit();
         signExtend = new SignExtend();
+        multiplexer = new Multiplexer();
         aLUControl = new ALUControl();
         aLU = new ALU();
 
