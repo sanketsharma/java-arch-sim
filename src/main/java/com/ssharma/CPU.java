@@ -36,7 +36,7 @@ public class CPU {
         logger.info("CPU created");
     }
 
-    private int fetchInstruction(Register programCounter){
+    private int fetchInstruction(){
         return instructionMemory.getMemoryLocationValue(programCounter.getValue());
     }
 
@@ -75,7 +75,7 @@ public class CPU {
 
     public void run(){
         while(!halted){
-            int instruction = fetchInstruction(programCounter);
+            int instruction = fetchInstruction();
 
             int ins26To31 = extract26To31(instruction);
             controlUnit.setInput(ins26To31);
